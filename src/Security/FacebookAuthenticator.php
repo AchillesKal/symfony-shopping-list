@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\SocialAuthenticator;
 use Doctrine\ORM\EntityManager;
@@ -42,19 +43,25 @@ class FacebookAuthenticator extends SocialAuthenticator
         $email = $facebookUser->getEmail();
 
         // 1) have they logged in with Facebook before? Easy!
-        $existingUser = $this->em->getRepository('App:User')
+        $existingUser = $this->em->getRepository(User::class)
             ->findOneBy(['facebookId' => $facebookUser->getId()]);
         if ($existingUser) {
             return $existingUser;
         }
 
         // 2) do we have a matching user by email?
-        $user = $this->em->getRepository('App:User')
+        $existingUser = $this->em->getRepository(User::class)
             ->findOneBy(['email' => $email]);
+        if ($existingUser) {
+            return $existingUser;
+        }
 
         // 3) Maybe you just want to "register" them by creating
         // a User object
+        $user = new User();
+        $user->setEmail($email);
         $user->setFacebookId($facebookUser->getId());
+
         $this->em->persist($user);
         $this->em->flush();
 

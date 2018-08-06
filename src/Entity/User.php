@@ -26,11 +26,43 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", unique=true, length=191)
      */
-    private $apiKey;
+    private $facebookId;
 
     public function getUsername()
     {
         return $this->email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFacebookId()
+    {
+        return $this->facebookId;
+    }
+
+    /**
+     * @param mixed $facebookId
+     */
+    public function setFacebookId($facebookId): void
+    {
+        $this->facebookId = $facebookId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email): void
+    {
+        $this->email = $email;
     }
 
     public function getRoles()
