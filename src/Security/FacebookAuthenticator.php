@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\SocialAuthenticator;
 use Doctrine\ORM\EntityManager;
 use League\OAuth2\Client\Provider\FacebookUser;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
@@ -58,9 +59,7 @@ class FacebookAuthenticator extends SocialAuthenticator
 
         // 3) Maybe you just want to "register" them by creating
         // a User object
-        $user = new User();
-        $user->setEmail($email);
-        $user->setFacebookId($facebookUser->getId());
+        $user = new User($email,$facebookUser->getId());
 
         $this->em->persist($user);
         $this->em->flush();
@@ -85,17 +84,20 @@ class FacebookAuthenticator extends SocialAuthenticator
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        // TODO: Implement onAuthenticationFailure() method.
+        $url = $this->router->generate("homepage");
+        return new RedirectResponse($url);
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        // TODO: Implement onAuthenticationSuccess() method.
+        $url = $this->router->generate("homepage");
+        return new RedirectResponse($url);
     }
 
     public function start(Request $request, AuthenticationException $authException = null)
     {
-        // TODO: Implement start() method.
+        $url = $this->router->generate("homepage");
+        return new RedirectResponse($url);
     }
 
 

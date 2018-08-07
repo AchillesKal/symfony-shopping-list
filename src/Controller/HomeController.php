@@ -14,4 +14,12 @@ class HomeController extends Controller
     {
         return $this->render('homepage/index.html.twig');
     }
+
+    /**
+     * @Route("/about", name="aboutpage")
+     */
+    public function about()
+    {
+        return $this->render('homepage/about.html.twig');
+    }
 }
