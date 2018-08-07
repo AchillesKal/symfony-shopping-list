@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="app_users")
  */
-class User implements UserInterface
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id
@@ -27,6 +27,17 @@ class User implements UserInterface
      * @ORM\Column(type="string", unique=true, length=191)
      */
     private $facebookId;
+
+    /**
+     * User constructor.
+     * @param $email
+     * @param $facebookId
+     */
+    public function __construct($email, $facebookId)
+    {
+        $this->email = $email;
+        $this->facebookId = $facebookId;
+    }
 
     public function getUsername()
     {
@@ -78,5 +89,22 @@ class User implements UserInterface
     }
     public function eraseCredentials()
     {
+    }
+
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->email,
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->email,
+            ) = unserialize($serialized, array('allowed_classes' => false));
     }
 }
