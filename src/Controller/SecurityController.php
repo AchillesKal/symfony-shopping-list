@@ -3,16 +3,15 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
-class FacebookController extends Controller
+class SecurityController extends Controller
 {
     /**
      * Link to this controller to start the "connect" process
      *
-     * @Route("/connect/facebook")
+     * @Route("/connect/facebook", name="connect_facebook_login"))
      */
     public function connectAction()
     {
@@ -30,13 +29,14 @@ class FacebookController extends Controller
      */
     public function connectCheckAction(Request $request)
     {
-        // ** if you want to *authenticate* the user, then
-        // leave this method blank and create a Guard authenticator
-        // (read below)
 
-        /** @var \KnpU\OAuth2ClientBundle\Client\Provider\FacebookClient $client */
-        $client = $this->get('oauth2.registry')
-            ->getClient('facebook_main');
+    }
+
+    /**
+     * @Route("/logout", name="security_logout")
+     */
+    public function logout()
+    {
 
     }
 }
