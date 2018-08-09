@@ -96,7 +96,7 @@ class FacebookAuthenticator extends SocialAuthenticator
 
     public function start(Request $request, AuthenticationException $authException = null)
     {
-        $url = $this->router->generate("homepage");
+        $url = $this->router->generate("login");
         return new RedirectResponse($url);
     }
 

@@ -9,6 +9,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class SecurityController extends Controller
 {
     /**
+     * @Route("/login", name="login"))
+     */
+    public function login()
+    {
+        return $this->render('homepage/index.html.twig');
+    }
+
+    /**
      * Link to this controller to start the "connect" process
      *
      * @Route("/connect/facebook", name="connect_facebook_login"))
