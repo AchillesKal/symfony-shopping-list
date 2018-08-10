@@ -5,11 +5,9 @@ namespace App\Security;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\SocialAuthenticator;
-use Doctrine\ORM\EntityManager;
 use League\OAuth2\Client\Provider\FacebookUser;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use KnpU\OAuth2ClientBundle\Client\Provider\FacebookClient;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
@@ -72,14 +70,9 @@ class FacebookAuthenticator extends SocialAuthenticator
         return $request->attributes->get('_route') === 'connect_facebook_check';
     }
 
-    /**
-     * @return FacebookClient
-     */
-    private function getFacebookClient()
+    private function getFacebookClient(): FacebookClient
     {
-        return $this->clientRegistry
-            // "facebook_main" is the key used in config.yml
-            ->getClient('facebook_main');
+        return $this->clientRegistry->getClient('facebook_main');
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
