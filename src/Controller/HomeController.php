@@ -12,7 +12,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return $this->render('homepage/index.html.twig');
+        return $this->render('index.html.twig');
     }
 
     /**
@@ -20,6 +20,6 @@ class HomeController extends Controller
      */
     public function about()
     {
-        return $this->render('homepage/about.html.twig');
+        return $this->render('about.html.twig');
     }
 }

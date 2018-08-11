@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block body %}
+    <div class="app-login">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <h1>Login</h1>
+                    {% if not is_granted('ROLE_USER') %}
+                        <a href="{{ path('connect_facebook_login') }}">
+                            <i class="fab fa-facebook-square"></i>
+                            Facebook
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
