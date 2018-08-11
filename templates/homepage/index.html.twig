@@ -6,6 +6,8 @@
 
 {% block body %}
 <div class="app">
-
+    {% if not is_granted('ROLE_USER') %}
+        <a href="{{ path('connect_facebook_login') }}">Facebook</a>
+    {% endif %}
 </div>
 {% endblock %}

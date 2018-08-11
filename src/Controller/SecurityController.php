@@ -13,7 +13,7 @@ class SecurityController extends Controller
      */
     public function login()
     {
-        return $this->render('homepage/index.html.twig');
+        return $this->render('homepage/login.html.twig');
     }
 
     /**
