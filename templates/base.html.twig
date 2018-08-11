@@ -14,6 +14,8 @@
             <a href="{{ path('connect_facebook_login') }}">Facebook</a>
         {% endif %}
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('build/app.ts') }}"></script>
+        {% endblock %}
     </body>
 </html>
