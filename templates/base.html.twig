@@ -10,9 +10,6 @@
         {% endblock %}
     </head>
     <body>
-        {% if is_granted('ROLE_USER') %}
-            <a href="{{ path('security_logout') }}">Logout</a>
-        {% endif %}
         {% block body %}{% endblock %}
         {% block javascripts %}
             <script src="{{ asset('build/app.js') }}"></script>
