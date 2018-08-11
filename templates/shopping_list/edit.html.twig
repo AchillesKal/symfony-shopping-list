@@ -1,8 +1,8 @@
-{% extends 'base.html.twig' %}
+{% extends 'app/layout.html.twig' %}
 
-{% block title %}Edit ShoppingList{% endblock %}
+{% block title %}New ShoppingList{% endblock %}
 
-{% block body %}
+{% block content %}
     <h1>Edit ShoppingList</h1>
 
     {{ include('shopping_list/_form.html.twig', {'button_label': 'Update'}) }}
