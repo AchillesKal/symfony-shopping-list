@@ -25,6 +25,12 @@ class ShoppingList
      */
     private $name;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="shoppingLists")
+     * @ORM\JoinColumn(name="owner", referencedColumnName="id")
+     */
+    private $owner;
+
     public function getId()
     {
         return $this->id;
@@ -38,6 +44,24 @@ class ShoppingList
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    /**
+     * @param mixed $owner
+     */
+    public function setOwner($owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }

@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * @Route("/shopping/list")
@@ -26,7 +27,7 @@ class ShoppingListController extends Controller
     /**
      * @Route("/new", name="shopping_list_new", methods="GET|POST")
      */
-    public function new(Request $request): Response
+    public function new(Request $request, Security $security): Response
     {
         $shoppingList = new ShoppingList();
         $form = $this->createForm(ShoppingListType::class, $shoppingList);
@@ -34,6 +35,8 @@ class ShoppingListController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $currentUser = $security->getUser();
+            $shoppingList->setOwner($currentUser);
             $em->persist($shoppingList);
             $em->flush();
 
