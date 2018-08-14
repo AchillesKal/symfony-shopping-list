@@ -5,5 +5,20 @@
 {% endblock %}
 
 {% block content %}
-Homepage
+    {% for shopping_list in shopping_lists %}
+        <div>
+            <span>{{ shopping_list.id }}</span>
+            <span>{{ shopping_list.name }}</span>
+            <span>{{ shopping_list.createdAt ? shopping_list.createdAt|date('Y-m-d H:i:s') : '' }}</span>
+            <span>{{ shopping_list.updatedAt ? shopping_list.updatedAt|date('Y-m-d H:i:s') : '' }}</span>
+            <span>
+                <a href="{{ path('shopping_list_show', {'id': shopping_list.id}) }}">show</a>
+                <a href="{{ path('shopping_list_edit', {'id': shopping_list.id}) }}">edit</a>
+            </span>
+        </div>
+    {% else %}
+        <div>
+            <td colspan="5">no records found</td>
+        </div>
+    {% endfor %}
 {% endblock %}
