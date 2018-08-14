@@ -2,18 +2,32 @@
 
 namespace App\Controller;
 
-use App\Repository\ShoppingListRepository;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Security\Core\Security;
+use App\Entity\User;
 
+/**
+ * Class HomeController
+ * @package App\Controller
+ */
 class HomeController extends Controller
 {
     /**
      * @Route("/", name="homepage")
+     * @param Security $security
+     * @return Response
      */
-    public function index(ShoppingListRepository $shoppingListRepository)
+    public function index(Security $security): Response
     {
-        return $this->render('app/index.html.twig', ['shopping_lists' => $shoppingListRepository->findAll()]);
+        /* @var $currentUser User */
+        $currentUser = $security->getUser();
+        $userShoppingLists = $currentUser->getShoppingLists();
+
+        return $this->render('app/index.html.twig', [
+            'shopping_lists' => $userShoppingLists
+        ]);
     }
 
     /**

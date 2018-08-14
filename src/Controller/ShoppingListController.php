@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\ShoppingList;
+use App\Entity\User;
 use App\Form\ShoppingListType;
 use App\Repository\ShoppingListRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -19,9 +20,15 @@ class ShoppingListController extends Controller
     /**
      * @Route("/", name="shopping_list_index", methods="GET")
      */
-    public function index(ShoppingListRepository $shoppingListRepository): Response
+    public function index(Security $security): Response
     {
-        return $this->render('shopping_list/index.html.twig', ['shopping_lists' => $shoppingListRepository->findAll()]);
+        /* @var $currentUser User */
+        $currentUser = $security->getUser();
+        $userShoppingLists = $currentUser->getShoppingLists();
+
+        return $this->render('app/index.html.twig', [
+            'shopping_lists' => $userShoppingLists
+        ]);
     }
 
     /**

@@ -14,7 +14,7 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 5; $i++) {
             $fakeFacebookId = 12345678912345 . $i;
             $fakeEmail = "fake" . $i . '@mail.com';
-            $user = new User($fakeFacebookId, $fakeEmail);
+            $user = new User($fakeEmail,$fakeFacebookId);
 
             // Create 2 shopping lists per user.
             for($x = 0; $x < 2; $x++) {
