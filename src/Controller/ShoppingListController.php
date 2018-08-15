@@ -5,12 +5,12 @@ namespace App\Controller;
 use App\Entity\ShoppingList;
 use App\Entity\User;
 use App\Form\ShoppingListType;
-use App\Repository\ShoppingListRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/shopping/list")
@@ -58,6 +58,7 @@ class ShoppingListController extends Controller
 
     /**
      * @Route("/{id}", name="shopping_list_show", methods="GET")
+     * @IsGranted("view", subject="shoppingList")
      */
     public function show(ShoppingList $shoppingList): Response
     {
