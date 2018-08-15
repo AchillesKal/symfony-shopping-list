@@ -13,8 +13,6 @@ class ShoppingListType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('createdAt')
-            ->add('updatedAt')
         ;
     }
 
