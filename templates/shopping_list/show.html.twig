@@ -3,32 +3,27 @@
 {% block title %}New ShoppingList{% endblock %}
 
 {% block content %}
-    <h1>ShoppingList</h1>
+    <div class="table">
+        <div>
+            <div>
+                <h1>{{ shopping_list.name }}</h1>
+                <a href="{{ path('shopping_list_index') }}">
+                    <i class="fas fa-arrow-circle-left"></i>
+                    back to list
+                </a>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ shopping_list.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ shopping_list.name }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ shopping_list.createdAt ? shopping_list.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ shopping_list.updatedAt ? shopping_list.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('shopping_list_index') }}">back to list</a>
-
-    <a href="{{ path('shopping_list_edit', {'id': shopping_list.id}) }}">edit</a>
+                <a class="btn" href="{{ path('shopping_list_edit', {'id': shopping_list.id}) }}">edit</a>
+            </div>
+            <div>
+                <div>CreatedAt</div>
+                <div>{{ shopping_list.createdAt ? shopping_list.createdAt|date('Y-m-d H:i:s') : '' }}</div>
+            </div>
+            <div>
+                <div>UpdatedAt</div>
+                <div>{{ shopping_list.updatedAt ? shopping_list.updatedAt|date('Y-m-d H:i:s') : '' }}</div>
+            </div>
+        </div>
+    </div>
 
     {{ include('shopping_list/_delete_form.html.twig') }}
 {% endblock %}
