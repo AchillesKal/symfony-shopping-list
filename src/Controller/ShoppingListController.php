@@ -67,6 +67,7 @@ class ShoppingListController extends Controller
 
     /**
      * @Route("/{id}/edit", name="shopping_list_edit", methods="GET|POST")
+     * @IsGranted("edit", subject="shoppingList")
      */
     public function edit(Request $request, ShoppingList $shoppingList): Response
     {
@@ -87,6 +88,7 @@ class ShoppingListController extends Controller
 
     /**
      * @Route("/{id}", name="shopping_list_delete", methods="DELETE")
+     * @IsGranted("edit", subject="shoppingList")
      */
     public function delete(Request $request, ShoppingList $shoppingList): Response
     {
