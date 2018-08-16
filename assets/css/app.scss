@@ -1,11 +1,70 @@
 @import "~bootstrap/scss/bootstrap";
 @import "~font-awesome/scss/font-awesome";
 
-.app-login{
-  background-color: #2e6da4;
+.login{
+  background-color: #0747A6;
   height: 100vh;
+  color: #FFF;
+
+  &-container{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    min-height: 500px;
+    width: 400px;
+    margin: 0px auto
+  }
+
+  a{
+
+  }
 }
 
-.app-login a{
-  color: #FFF;
+.login-title{
+  margin: 48px 0;
 }
+
+.login-subtitle{
+  margin: 0  0 48px 0 ;
+}
+
+.login-social-button{
+  font-weight: bold;
+  box-shadow: rgba(0, 0, 0, 0.2) 1px 1px 5px 0px;
+  background: #FFF;
+  height: 39px;
+  line-height: 39px;
+  width: 100%;
+  display: block;
+  text-align: center;
+  margin-bottom: 20px;
+
+  .fab{
+    font-size: 22px;
+    vertical-align: middle;
+    margin-right: 5px;
+  }
+
+  &:hover {
+    text-decoration: none!important;
+    background: rgba(9, 30, 66, 0.02) !important;
+  }
+
+  &:last-child{
+    margin-bottom: 0;
+  }
+}
+
+.login-body{
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 10px;
+  box-sizing: border-box;
+  color: rgb(23, 43, 77);
+  background: rgb(255, 255, 255);
+  border-radius: 3px;
+  padding: 48px;
+
+  a{
+    color: rgb(80, 95, 121);
+  }
+}
+
