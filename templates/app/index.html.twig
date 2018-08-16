@@ -6,19 +6,36 @@
 
 {% block content %}
     <div class="container">
+            <form>
+                <div class="input-group">
+                    <input type="text"
+                           name="q"
+                           class="form-control"
+                           placeholder="Search..."
+                           value="{{ app.request.query.get('q') }}"
+                    >
+                    <div class="input-group-append">
+                        <button type="submit"
+                                class="btn btn-outline-secondary">
+                            <span class="fa fa-search"></span>
+                        </button>
+                    </div>
+                </div>
+            </form>
         <div class="row">
             {% for shopping_list in shopping_lists %}
                 <div  class="col-3 card">
                     <div class="card-body">
                         <h5 class="card-title">{{ shopping_list.name }}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{ shopping_list.createdAt ? shopping_list.createdAt|date('Y-m-d H:i:s') : '' }}</h6>
-                        <p class="card-text">{{ shopping_list.updatedAt ? shopping_list.updatedAt|date('Y-m-d H:i:s') : '' }}</p>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ shopping_list.createdAt ? shopping_list.createdAt|date('d/m/Y H:i') : '' }}</h6>
                         <a href="{{ path('shopping_list_show', {'id': shopping_list.id}) }}">show</a>
                     </div>
                 </div>
             {% else %}
                 <div>
-                    <td colspan="5">no records found</td>
+                    <div class="text-center">
+                        No shopping lists found
+                    </div>
                 </div>
             {% endfor %}
         </div>

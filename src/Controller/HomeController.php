@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Repository\ShoppingListRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -19,11 +21,13 @@ class HomeController extends Controller
      * @param Security $security
      * @return Response
      */
-    public function index(Security $security): Response
+    public function index(Security $security, Request $request, ShoppingListRepository $repository): Response
     {
+        $q = $request->query->get('q');
+
         /* @var $currentUser User */
         $currentUser = $security->getUser();
-        $userShoppingLists = $currentUser->getShoppingLists();
+        $userShoppingLists = $repository->findAllShoppingListsByUser($currentUser, $q);
 
         return $this->render('app/index.html.twig', [
             'shopping_lists' => $userShoppingLists

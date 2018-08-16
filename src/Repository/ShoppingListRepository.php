@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\ShoppingList;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -17,6 +18,24 @@ class ShoppingListRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, ShoppingList::class);
+    }
+
+    public function findAllShoppingListsByUser(User $user, ?string $term)
+    {
+        $qb = $this->createQueryBuilder('s');
+
+        $qb->andWhere('s.owner = :owner')
+        ->setParameter('owner', $user->getId());
+
+        if($term) {
+            $qb->andWhere('s.name LIKE :term')
+                ->setParameter('term', '%' . $term . '%');
+        }
+
+        return $qb
+            ->orderBy('s.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
     }
 
 //    /**
