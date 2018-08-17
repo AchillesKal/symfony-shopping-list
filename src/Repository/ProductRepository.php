@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Entity\ShoppingListItem;
+use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method ShoppingListItem|null find($id, $lockMode = null, $lockVersion = null)
- * @method ShoppingListItem|null findOneBy(array $criteria, array $orderBy = null)
- * @method ShoppingListItem[]    findAll()
- * @method ShoppingListItem[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Product|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Product|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Product[]    findAll()
+ * @method Product[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ShoppingListItemRepository extends ServiceEntityRepository
+class ProductRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, ShoppingListItem::class);
+        parent::__construct($registry, Product::class);
     }
 
 //    /**

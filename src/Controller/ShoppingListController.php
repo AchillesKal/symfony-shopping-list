@@ -77,7 +77,7 @@ class ShoppingListController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('shopping_list_edit', ['id' => $shoppingList->getId()]);
+            return $this->redirectToRoute('homepage', ['id' => $shoppingList->getId()]);
         }
 
         return $this->render('shopping_list/edit.html.twig', [
@@ -98,6 +98,6 @@ class ShoppingListController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('shopping_list_index');
+        return $this->redirectToRoute('homepage');
     }
 }
