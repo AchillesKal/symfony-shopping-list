@@ -47,7 +47,7 @@ class ShoppingListController extends Controller
             $em->persist($shoppingList);
             $em->flush();
 
-            return $this->redirectToRoute('shopping_list_index');
+            return $this->redirectToRoute('homepage');
         }
 
         return $this->render('shopping_list/new.html.twig', [

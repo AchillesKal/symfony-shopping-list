@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\ShoppingListRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,16 +22,22 @@ class HomeController extends Controller
      * @param Security $security
      * @return Response
      */
-    public function index(Security $security, Request $request, ShoppingListRepository $repository): Response
+    public function index(Security $security, Request $request, ShoppingListRepository $repository,  PaginatorInterface $paginator): Response
     {
         $q = $request->query->get('q');
 
         /* @var $currentUser User */
         $currentUser = $security->getUser();
-        $userShoppingLists = $repository->findAllShoppingListsByUser($currentUser, $q);
+        $queryBuilder = $repository->getWithSearchQueryBuilder($currentUser, $q);
+
+        $pagination = $paginator->paginate(
+            $queryBuilder,
+            $request->query->getInt('page', 1),
+            12
+        );
 
         return $this->render('app/index.html.twig', [
-            'shopping_lists' => $userShoppingLists
+            'pagination' => $pagination
         ]);
     }
 

@@ -22,8 +22,9 @@
                     </div>
                 </div>
             </form>
+            ({{ pagination.getTotalItemCount }})
         <div class="row">
-            {% for shopping_list in shopping_lists %}
+            {% for shopping_list in pagination %}
                 <div  class="col-3 card">
                     <div class="card-body">
                         <h5 class="card-title">{{ shopping_list.name }}</h5>
@@ -39,5 +40,6 @@
                 </div>
             {% endfor %}
         </div>
+        {{ knp_pagination_render(pagination) }}
     </div>
 {% endblock %}

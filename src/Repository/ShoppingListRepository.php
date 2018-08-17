@@ -5,14 +5,9 @@ namespace App\Repository;
 use App\Entity\ShoppingList;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-/**
- * @method ShoppingList|null find($id, $lockMode = null, $lockVersion = null)
- * @method ShoppingList|null findOneBy(array $criteria, array $orderBy = null)
- * @method ShoppingList[]    findAll()
- * @method ShoppingList[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
 class ShoppingListRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
@@ -20,7 +15,7 @@ class ShoppingListRepository extends ServiceEntityRepository
         parent::__construct($registry, ShoppingList::class);
     }
 
-    public function findAllShoppingListsByUser(User $user, ?string $term)
+    public function getWithSearchQueryBuilder(User $user, ?string $term) : QueryBuilder
     {
         $qb = $this->createQueryBuilder('s');
 
@@ -33,9 +28,7 @@ class ShoppingListRepository extends ServiceEntityRepository
         }
 
         return $qb
-            ->orderBy('s.createdAt', 'DESC')
-            ->getQuery()
-            ->getResult();
+            ->orderBy('s.createdAt', 'DESC');
     }
 
 //    /**
