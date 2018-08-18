@@ -62,6 +62,7 @@ class ShoppingListController extends Controller
      */
     public function show(ShoppingList $shoppingList): Response
     {
+        dump($shoppingList);
         return $this->render('shopping_list/show.html.twig', ['shopping_list' => $shoppingList]);
     }
 

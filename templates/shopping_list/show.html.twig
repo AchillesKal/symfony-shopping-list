@@ -22,6 +22,17 @@
                 <div>UpdatedAt</div>
                 <div>{{ shopping_list.updatedAt ? shopping_list.updatedAt|date('Y-m-d H:i') : '' }}</div>
             </div>
+            <div>
+                {% for product in shopping_list.products %}
+                    <div>
+                        {{ product.name }}
+                    </div>
+                {% else %}
+                    <div>
+                        There are no products in this list.
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 

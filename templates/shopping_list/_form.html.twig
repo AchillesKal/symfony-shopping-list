@@ -1,12 +1,5 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
 
-    <ul class="products" data-prototype="{{ form_widget(form.products.vars.prototype)|e('html_attr') }}">
-        {# iterate over each existing tag and render its only field: name #}
-        {% for product in form.products %}
-            <li>{{ form_row(product.name) }}</li>
-        {% endfor %}
-    </ul>
-
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

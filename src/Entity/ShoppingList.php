@@ -34,7 +34,7 @@ class ShoppingList
     private $owner;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Product", inversedBy="shoppingLists")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Product", inversedBy="shoppingLists", cascade={"persist"})
      */
     private $products;
 

@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Product;
 use App\Entity\ShoppingList;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -18,9 +19,12 @@ class AppFixtures extends Fixture
 
             // Create 2 shopping lists per user.
             for($x = 0; $x < 2; $x++) {
+                $product = new Product();
+                $product->setName("Product1");
                 $shoppingList = new ShoppingList();
                 $shoppingList->setName("ShoppingList" . $x);
                 $shoppingList->setOwner($user);
+                $shoppingList->addProduct($product);
                 $manager->persist($shoppingList);
             }
 
