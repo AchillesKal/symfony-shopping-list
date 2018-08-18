@@ -27,7 +27,7 @@ class Product
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\ShoppingList", mappedBy="shoppingListItems")
+     * @ORM\ManyToMany(targetEntity="App\Entity\ShoppingList", mappedBy="products")
      */
     private $shoppingLists;
 
@@ -65,7 +65,7 @@ class Product
     {
         if (!$this->shoppingLists->contains($shoppingList)) {
             $this->shoppingLists[] = $shoppingList;
-            $shoppingList->addShoppingListItem($this);
+            $shoppingList->addProduct($this);
         }
 
         return $this;
@@ -75,9 +75,14 @@ class Product
     {
         if ($this->shoppingLists->contains($shoppingList)) {
             $this->shoppingLists->removeElement($shoppingList);
-            $shoppingList->removeShoppingListItem($this);
+            $shoppingList->removeProduct($this);
         }
 
         return $this;
     }
+
+    public function __toString() {
+        return $this->name;
+    }
+
 }

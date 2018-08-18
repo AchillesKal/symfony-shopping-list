@@ -34,7 +34,7 @@ class ShoppingList
     private $owner;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Product", inversedBy="shoppingLists")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Product", inversedBy="shoppingLists")
      */
     private $products;
 
@@ -103,4 +103,9 @@ class ShoppingList
 
         return $this;
     }
+
+    public function __toString() {
+        return $this->name;
+    }
+
 }
