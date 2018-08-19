@@ -4,7 +4,7 @@
     working_dir: "{{ symfony_root_dir }}"
     no_dev: "{{ 'yes' if ('prod' == symfony_env) else 'no' }}"
   tags:
-  - deploy
+    - deploy
   when: code_changed
 
 - name: Fix var directory permissions
@@ -15,8 +15,24 @@
     recurse: yes
   changed_when: false
   tags:
-  - permissions
-  - deploy
+    - permissions
+    - deploy
+
+- name: Set Symfony secret in parameters.yml
+  lineinfile:
+    dest: "{{ symfony_root_dir }}/app/config/parameters.yml"
+    regexp: "^    secret:"
+    line: "    secret: {{ symfony_secret }}"
+  tags:
+    - deploy
+
+- name: Set Loggly token in parameters.yml
+  lineinfile:
+    dest: "{{ symfony_root_dir }}/app/config/parameters.yml"
+    regexp: "^    loggly_token:"
+    line: "    loggly_token: {{ loggly_token }}"
+  tags:
+    - deploy
 
 # Symfony console commands
 - name: Create DB if not exists
@@ -24,14 +40,14 @@
   register: db_create_result
   changed_when: "not db_create_result.stdout|search('already exists. Skipped')"
   tags:
-  - deploy
+    - deploy
 
 - name: Execute migrations
   command: '{{ symfony_console_path }} doctrine:migrations:migrate --no-interaction'
   register: db_migrations_result
   changed_when: "not db_migrations_result.stdout|search('No migrations to execute')"
   tags:
-  - deploy
+    - deploy
   when: code_changed
 
 - name: Load data fixtures
@@ -39,11 +55,11 @@
   when: symfony_env != "prod"
   changed_when: false
   tags:
-  - deploy
+    - deploy
 
 - name: Clear cache
   command: '{{ symfony_console_path }} cache:clear --env={{ symfony_env }}'
   changed_when: false
   tags:
-  - deploy
-  when: code_changed
+    - deploy
+#  when: code_changed

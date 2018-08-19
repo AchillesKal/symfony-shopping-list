@@ -23,3 +23,4 @@ yarn-error.log
 ###< symfony/webpack-encore-pack ###
 
 /.vagrant/
+/ansible/vars/vault.yml
