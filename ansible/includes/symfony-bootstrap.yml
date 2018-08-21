@@ -42,20 +42,25 @@
   tags:
     - deploy
 
-- name: Execute migrations
-  command: '{{ symfony_console_path }} doctrine:migrations:migrate --no-interaction'
-  register: db_migrations_result
-  changed_when: "not db_migrations_result.stdout|search('No migrations to execute')"
-  tags:
-    - deploy
-  when: code_changed
+#- name: Execute migrations
+#  command: '{{ symfony_console_path }} doctrine:migrations:migrate --no-interaction'
+#  register: db_migrations_result
+#  changed_when: "not db_migrations_result.stdout|search('No migrations to execute')"
+#  tags:
+#    - deploy
+#  when: code_changed
+#
+#- name: Load data fixtures
+#  command: '{{ symfony_console_path }} hautelook_alice:doctrine:fixtures:load --no-interaction'
+#  when: symfony_env != "prod"
+#  changed_when: false
+#  tags:
+#    - deploy
 
-- name: Load data fixtures
-  command: '{{ symfony_console_path }} hautelook_alice:doctrine:fixtures:load --no-interaction'
-  when: symfony_env != "prod"
-  changed_when: false
+- name: Install front end dependencies
+  yarn:
   tags:
-    - deploy
+  - deploy
 
 - name: Clear cache
   command: '{{ symfony_console_path }} cache:clear --env={{ symfony_env }}'
