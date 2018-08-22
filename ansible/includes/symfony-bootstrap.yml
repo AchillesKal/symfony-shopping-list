@@ -57,11 +57,6 @@
 #  tags:
 #    - deploy
 
-- name: Install front end dependencies
-  yarn:
-  tags:
-  - deploy
-
 - name: Clear cache
   command: '{{ symfony_console_path }} cache:clear --env={{ symfony_env }}'
   changed_when: false
