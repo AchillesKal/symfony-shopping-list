@@ -1,5 +1,13 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
 
+    <h3>Products</h3>
+    <ul class="products" data-prototype="{{ form_widget(form.products.vars.prototype)|e('html_attr') }}">
+        {% for product in form.products %}
+            <li>{{ form_row(product.name) }}</li>
+        {% endfor %}
+    </ul>
+
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
+

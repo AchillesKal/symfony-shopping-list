@@ -14,7 +14,13 @@ class ShoppingListType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('products');
+            ->add('products', CollectionType::class, array(
+            'entry_type' => ProductType::class,
+            'entry_options' => array('label' => false),
+            'allow_add' => true,
+            'by_reference' => false,
+            'allow_delete' => true,
+        ));
     }
 
     public function configureOptions(OptionsResolver $resolver)
