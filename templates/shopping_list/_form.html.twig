@@ -1,17 +1,32 @@
+{% import _self as formMacros %}
+
+{% macro printProductRow(product) %}
+    <div class="col-xs-4 js-product-item">
+        <a href="#" class="js-remove-product pull-right">
+            <span class="fa fa-close"></span>
+        </a>
+        {{ form_errors(product) }}
+        {{ form_row(product.name) }}
+    </div>
+{% endmacro %}
+
 {{ form_start(form) }}
     {{ form_row(form.name) }}
 
-    <h3>Scientists</h3>
-    <div class="row js-genus-scientist-wrapper">
+    <h3>Products</h3>
+    <div class="row js-products-wrapper"
+         data-prototype="{{ formMacros.printProductRow(form.products.vars.prototype)|e('html_attr') }}"
+         data-index="{{ form.products|length }}"
+    >
         {% for product in form.products %}
-            <div class="col-xs-4 js-genus-scientist-item">
-                <a href="#" class="js-remove-scientist pull-right">
-                    <span class="fa fa-close"></span>
-                </a>
-                {{ form_errors(product) }}
-                {{ form_row(product.name) }}
-            </div>
+            {{ formMacros.printProductRow(product) }}
         {% endfor %}
+        <a href="#" class="js-product-add">
+            <span class="fa fa-plus-circle"></span>
+            Add Product
+        </a>
     </div>
+    {# prevents weird label from showing up in new #}
+    {{ form_widget(form.products) }}
     <button type="submit" class="btn btn-primary" formnovalidate>Save</button>
 {{ form_end(form) }}
