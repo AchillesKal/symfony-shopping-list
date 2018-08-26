@@ -64,3 +64,27 @@
   }
 }
 
+.logout-link{
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #2836a0;
+  color: #FFF;
+  margin: 0 10px 5px;
+}
+
+.layout-sidebar{
+  background-color: #2836a0;
+  color: #FFF;
+  position: fixed;
+  height: 100%;
+
+  a{
+    color: #FFF;
+  }
+}
+
+.layout-main{
+  margin-left: 25%;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
