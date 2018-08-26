@@ -3,12 +3,17 @@
 {% block title %}New ShoppingList{% endblock %}
 
 {% block content %}
-    <h1>Product index</h1>
+    <h1>Your products</h1>
+
+    <a class="btn btn-primary" href="{{ path('product_new') }}">
+        <i class="far fa-plus-square"></i>
+        Create new
+    </a>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>#</th>
                 <th>Name</th>
                 <th>CreatedAt</th>
                 <th>UpdatedAt</th>
@@ -18,7 +23,7 @@
         <tbody>
         {% for product in products %}
             <tr>
-                <td>{{ product.id }}</td>
+                <td>{{ loop.index }}</td>
                 <td>{{ product.name }}</td>
                 <td>{{ product.createdAt ? product.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ product.updatedAt ? product.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
@@ -34,6 +39,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('product_new') }}">Create new</a>
 {% endblock %}

@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-3 layout-sidebar">
+                    <header class="sidebar-title">
+                        <a class="navbar-brand" href="{{ path('homepage') }}">
+                            <i class="fas fa-home"></i> Home
+                        </a>
+                    </header>
                     <ul>
-                        <li>
-                            <a class="navbar-brand" href="{{ path('homepage') }}">
-                                <i class="fas fa-home"></i> Home
-                            </a>
-                        </li>
                         <li>
                             <a href="{{ path('shopping_list_new') }}">Add a shopping list</a>
                         </li>
