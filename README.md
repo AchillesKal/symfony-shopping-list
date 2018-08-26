@@ -46,7 +46,11 @@ Have fun!
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+### Ansible
+In order to run the ansible playbook execute the command:
+```
+ansible-playbook ansible/playbook.yml -i ansible/hosts.ini --ask-vault-pass
+```
 
 ## Built With
 

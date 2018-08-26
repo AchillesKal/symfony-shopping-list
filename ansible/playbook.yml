@@ -34,8 +34,6 @@
   roles:
     - nginx
     - geerlingguy.nodejs
-#    - role: DavidWittman.redis
-#      become: true
 
   tasks:
     - ping: ~
