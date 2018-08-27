@@ -1,0 +1,12 @@
+---
+- hosts: vb
+  gather_facts: false
+  vars:
+    ansistrano_deploy_from: ../../symfony-shopping-list
+    ansistrano_deploy_to: "/var/www/project"
+    ansistrano_deploy_via: git
+    ansistrano_git_repo: "https://github.com/AchillesKal/symfony-shopping-list.git"
+    ansistrano_git_branch: master
+    symfony_console_path: "bin/console"
+  roles:
+  - cbrunnkvist.ansistrano-symfony-deploy
