@@ -4,7 +4,5 @@
 - src: ansistrano.deploy
   version: 2.7.0
 
-- src: ansistrano.deploy
-  version: 2.7.0
-
-- src: cbrunnkvist.ansistrano-symfony-deploy
+- src: ansistrano.rollback
+  version: 2.0.1

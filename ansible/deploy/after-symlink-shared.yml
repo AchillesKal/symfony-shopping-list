@@ -1,0 +1,49 @@
+---
+- name: Set up infrastructure-related parameters
+  template:
+    src: '{{ playbook_dir }}/templates/parameters.yml.dist'
+    dest: '{{ ansistrano_release_path.stdout }}/app/config/parameters.yml'
+
+- name: Install Composer dependencies
+  composer:
+    command: install
+    arguments: --classmap-authoritative
+    optimize_autoloader: yes
+    working_dir: '{{ ansistrano_release_path.stdout }}'
+
+- name: Clear the cache
+  command: '{{ release_console_path }} cache:clear --no-warmup --env=prod'
+
+- name: Warm up the cache
+  command: '{{ release_console_path }} cache:warmup --env=prod'
+
+- name: Create DB if not exists
+  command: '{{ release_console_path }} doctrine:database:create --if-not-exists --env=prod'
+  register: create_db_output
+  changed_when: not create_db_output.stdout|search('already exists. Skipped')
+
+- name: Run migrations
+  command: '{{ release_console_path }} doctrine:migrations:migrate --no-interaction --env=prod'
+  register: run_migrations_output
+  changed_when: not run_migrations_output.stdout|search('No migrations to execute')
+
+- name: Install bundle assets
+  command: '{{ release_console_path }} assets:install --symlink --env=prod'
+
+- name: Install Node dependencies
+  command: yarn install
+  args:
+    chdir: '{{ ansistrano_release_path.stdout }}'
+
+- name: Install Webpack Encore assets
+  command: './node_modules/.bin/encore production'
+  args:
+    chdir: '{{ ansistrano_release_path.stdout }}'
+
+- name: Setup directory permissions for var/logs
+  become: true
+  file:
+    path: '{{ release_logs_path }}'
+    state: directory
+    mode: 0777
+    recurse: true
