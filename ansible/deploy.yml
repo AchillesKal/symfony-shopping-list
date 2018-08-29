@@ -51,7 +51,7 @@
     ansistrano_before_symlink_tasks_file: "{{ playbook_dir }}/deploy/before-symlink.yml"
 
   environment:
-    SYMFONY_ENV: prod
+    SYMFONY_ENV: dev
 
   roles:
     - ansistrano.deploy
