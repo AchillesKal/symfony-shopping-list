@@ -72,20 +72,20 @@
         name: "{{ item }}"
         state: latest
       with_items:
-        - php7.1-cli
-        - php7.1-curl
-        - php7.1-fpm
-        - php7.1-intl
-        - php7.1-mysql
-        - php7.1-opcache
-        - php7.1-xml
+        - php7.2-cli
+        - php7.2-curl
+        - php7.2-fpm
+        - php7.2-intl
+        - php7.2-mysql
+        - php7.2-opcache
+        - php7.2-xml
         - php-apcu
       notify: Restart PHP-FPM
 
     - name: Set date.timezone for CLI
       become: true
       ini_file:
-        path: /etc/php/7.1/cli/php.ini
+        path: /etc/php/7.2/cli/php.ini
         section: Date
         option: date.timezone
         value: UTC
@@ -93,7 +93,7 @@
     - name: Set date.timezone for FPM
       become: true
       ini_file:
-        path: /etc/php/7.1/fpm/php.ini
+        path: /etc/php/7.2/fpm/php.ini
         section: Date
         option: date.timezone
         value: UTC
@@ -102,7 +102,7 @@
     - name: Increase OPcache limit of accelerated files
       become: true
       ini_file:
-        path: /etc/php/7.1/fpm/php.ini
+        path: /etc/php/7.2/fpm/php.ini
         section: opcache
         option: opcache.max_accelerated_files
         value: 20000
@@ -111,7 +111,7 @@
     - name: Configure the PHP realpath cache
       become: true
       ini_file:
-        path: /etc/php/7.1/fpm/php.ini
+        path: /etc/php/7.2/fpm/php.ini
         section: PHP
         option: '{{ item.option }}'
         value: '{{ item.value }}'
@@ -199,5 +199,5 @@
     - name: Restart PHP-FPM
       become: true
       service:
-        name: php7.1-fpm
+        name: php7.2-fpm
         state: restarted
