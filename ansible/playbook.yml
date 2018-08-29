@@ -199,5 +199,5 @@
     - name: Restart PHP-FPM
       become: true
       service:
-        name: pp7.1-fpm
+        name: php7.1-fpm
         state: restarted

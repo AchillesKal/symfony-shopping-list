@@ -40,7 +40,7 @@
   args:
     chdir: '{{ ansistrano_release_path.stdout }}'
 
-- name: Setup directory permissions for var/logs
+- name: Setup directory permissions for var/log
   become: true
   file:
     path: '{{ release_logs_path }}'
