@@ -1,8 +1,8 @@
 ---
 - name: Set up infrastructure-related parameters
   template:
-    src: '{{ playbook_dir }}/templates/parameters.yml.dist'
-    dest: '{{ ansistrano_release_path.stdout }}/app/config/parameters.yml'
+    src: '{{ playbook_dir }}/templates/.env.dist'
+    dest: '{{ ansistrano_release_path.stdout }}/config/.env'
 
 - name: Install Composer dependencies
   composer:

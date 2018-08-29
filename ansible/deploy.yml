@@ -35,9 +35,9 @@
     # ansistrano_shared_files:
     #   - my-file.txt
     #   - path/to/file.txt
-    ansistrano_shared_paths:
-      - var/log
-      - node_modules
+#    ansistrano_shared_paths:
+#      - var/log
+#      - node_modules
 
     ansistrano_deploy_via: git # Method used to deliver the code to the server. Options are copy, rsync, git, svn, s3 or download
 
