@@ -28,7 +28,6 @@ class AppFixtures extends Fixture
                 $manager->persist($shoppingList);
             }
 
-
             $manager->persist($user);
         }
 
